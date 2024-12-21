@@ -1,7 +1,20 @@
-import { UserAgent } from "@/views/userAgent";
+import { BackToHome } from "@/components/backToHome/backToHome";
+import { headers } from "next/headers";
 
-const UserAgentRoot = () => {
-  return <UserAgent />;
-};
+export default function UserAgentPage() {
+  const headersList = headers();
+  const userAgent = headersList.get("user-agent") || "Unknown User Agent";
 
-export default UserAgentRoot;
+  return (
+    <div>
+      <BackToHome />
+      {userAgent && (
+        <div className="flex font-mono font-semibold text-sm">
+          <div className="border p-2">UserAgent</div>
+          <div className="border p-2">{userAgent}</div>
+        </div>
+      )}
+      {!userAgent && <div>No user agent</div>}
+    </div>
+  );
+}
