@@ -1,5 +1,12 @@
+export const dynamic = "force-dynamic";
+
+import { Suspense } from "react";
 import { Products } from "@/views/products";
 
-export default function ProductsRoot() {
-  return <Products />;
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Products />
+    </Suspense>
+  );
 }
